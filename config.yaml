@@ -1,4 +1,4 @@
-TITLE: RMCampos Blohg
+TITLE: RMCampos blog
 TITLE_HTML: RMCampos blog
 TAGLINE: Welcome to my personal corner and stuff
 #POSTS_PER_PAGE: 10
@@ -7,3 +7,4 @@ AUTHOR: Ricardo Campos
 TIMEZONE: UTC
 #POST_EXT: .rst
 THEME: Dark
+TRANSLATE: True

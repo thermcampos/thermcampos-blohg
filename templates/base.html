@@ -3,17 +3,22 @@
     :copyright: (c) 2010-2011 by Rafael Goncalves Martins
     :license: GPL-2
 -->
-<html>
+<html data-theme="{{ 'dark' if config.THEME == 'Dark' else 'light' }}">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="generator" content="blohg {{ version }}" />
-        {%- if config.THEME == 'Dark' -%}
-        <link type="text/css" media="screen" rel="stylesheet" href="{{
-            url_for('static', filename='screen-dark.css') }}" />
-        {%- else -%}
+        <script>
+            (function() {
+                var t = localStorage.getItem('blohg-theme');
+                if (t) document.documentElement.setAttribute('data-theme', t);
+            })();
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet" />
         <link type="text/css" media="screen" rel="stylesheet" href="{{
             url_for('static', filename='screen.css') }}" />
-        {%- endif %}
         <link rel="alternate" type="application/atom+xml" href="{{
             url_for('views.atom') }}" title="{{ config.TITLE }}" />
         <title>{{ config.TITLE }}{% block title %}{% endblock %}</title>
@@ -31,11 +36,14 @@
         <div id="header">
             <h1>{{ config.TITLE_HTML }}</h1>
             <h2>{{ config.TAGLINE }}</h2>
-            <ul>
-                <li><a href="{{ url_for('views.home') }}">Home</a></li>
-                <li><a href="{{ url_for('views.post_list') }}">Posts</a></li>
-                <li><a href="{{ url_for('views.content', slug='about') }}">About</a></li>
-            </ul>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('views.home') }}">Home</a></li>
+                    <li><a href="{{ url_for('views.post_list') }}">Posts</a></li>
+                    <li><a href="{{ url_for('views.content', slug='about') }}">About</a></li>
+                </ul>
+            </nav>
+            <button id="theme-toggle" type="button" aria-label="Toggle dark mode"></button>
         </div>
         <div id="body">
 
@@ -54,5 +62,21 @@
 {% block disqus_footer %}{% endblock %}
 <!-- end disqus footer -->
 
+        <script>
+            (function() {
+                var btn = document.getElementById('theme-toggle');
+                var root = document.documentElement;
+                function label(theme) {
+                    return theme === 'dark' ? 'Light' : 'Dark';
+                }
+                btn.textContent = label(root.getAttribute('data-theme'));
+                btn.addEventListener('click', function() {
+                    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                    root.setAttribute('data-theme', next);
+                    localStorage.setItem('blohg-theme', next);
+                    btn.textContent = label(next);
+                });
+            })();
+        </script>
     </body>
 </html>

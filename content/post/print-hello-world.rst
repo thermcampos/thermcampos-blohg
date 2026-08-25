@@ -38,3 +38,5 @@ using any of the options in the /contact page.
 Bye for now.
 
 o/
+
+.. author: R. Campos <ricardompcampos@gmail.com>

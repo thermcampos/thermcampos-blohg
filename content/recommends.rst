@@ -47,3 +47,5 @@ list for this section will be short and straight :)
 
 .. _`@TiagoTaquelim`: https://www.youtube.com/@TiagoTaquelim
 .. _`@RenatoAugustoTech`: https://www.youtube.com/@RenatoAugustoTech
+
+.. author: R. Campos <ricardompcampos@gmail.com>

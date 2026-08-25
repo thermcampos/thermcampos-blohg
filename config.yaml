@@ -1,8 +1,8 @@
-TITLE: RMCampos blog
-TITLE_HTML: RMCampos blog
-TAGLINE: Welcome to my personal corner and stuff
+TITLE: thermcampos blog
+TITLE_HTML: thermcampos
+TAGLINE: Welcome to my blog, personal corner and stuff
 #POSTS_PER_PAGE: 10
-AUTHOR: Ricardo Campos
+AUTHOR: R. Campos
 #DISQUS: your-disqus-id
 TIMEZONE: UTC
 #POST_EXT: .rst

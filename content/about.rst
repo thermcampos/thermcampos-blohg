@@ -20,15 +20,15 @@ Email: ricardompcampos@gmail.com
 
 Telegram: https://t.me/thermcampos
 
-IRC: RMCampos [at libera]
+IRC: thermcampos [at libera]
 
 Discord: https://discord.com/users/693090652770009138
 
 LinkedIn: https://www.linkedin.com/in/ricardompcampos/
 
-GitHub: https://github.com/RMCampos
+GitHub: https://github.com/thermcampos
 
-Portfolio, CV and Projects: https://rmcampos.github.io/portfolio-and-cv/
+Portfolio, CV and Projects: https://thermcampos.github.io/portfolio-and-cv/
 
 About this blog
 ---------------
@@ -41,5 +41,7 @@ No panel or UI. You can do everything from your terminal using git and vim.
 
 This means there's no auth, database, or heavy stuff to care in PHP.
 Blohg is built in Python on top of Flask, and Jinja2 for html rendering.
-You can learn more about it here: https://github.com/RMCampos/blohg.
+You can learn more about it here: https://github.com/thermcampos/blohg.
 All the credit goes to Rafael Martins, the author of Blohg: https://rafaelmartins.com/
+
+.. author: R. Campos <ricardompcampos@gmail.com>

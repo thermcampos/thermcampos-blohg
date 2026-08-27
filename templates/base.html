@@ -33,23 +33,28 @@
 
     </head>
     <body>
-        <div id="header">
-            <h1>{{ config.TITLE_HTML }}</h1>
-            <h2>{{ config.TAGLINE }}</h2>
-            <nav>
+        <header id="header">
+            <div class="site-name"><a href="{{ url_for('views.home') }}" rel="home">{{ config.TITLE_HTML }}</a></div>
+            <p class="site-tagline">{{ config.TAGLINE }}</p>
+            {%- set navlinks = [
+                {'href': url_for('views.home'), 'label': 'Home', 'key': ''},
+                {'href': url_for('views.post_list'), 'label': 'Posts', 'key': 'post'},
+                {'href': url_for('views.content', slug='license'), 'label': 'License', 'key': 'license'},
+                {'href': url_for('views.content', slug='recommends'), 'label': 'Recommends', 'key': 'recommends'},
+                {'href': url_for('views.content', slug='about'), 'label': 'About', 'key': 'about'}
+            ] %}
+            <nav aria-label="Primary">
                 <ul>
-                    <li><a href="{{ url_for('views.home') }}" data-label="Home" class="{{ 'active' if active_page == '' }}">Home</a></li>
-                    <li><a href="{{ url_for('views.post_list') }}" data-label="Posts" class="{{ 'active' if active_page == 'post' }}">Posts</a></li>
-                    <li><a href="{{ url_for('views.content', slug='license') }}" data-label="License" class="{{ 'active' if active_page == 'license' }}">License</a></li>
-                    <li><a href="{{ url_for('views.content', slug='recommends') }}" data-label="Recommends" class="{{ 'active' if active_page == 'recommends' }}">Recommends</a></li>
-                    <li><a href="{{ url_for('views.content', slug='about') }}" data-label="About" class="{{ 'active' if active_page == 'about' }}">About</a></li>
+                    {%- for link in navlinks %}
+                    <li><a href="{{ link.href }}" data-label="{{ link.label }}"{% if active_page == link.key %} class="active" aria-current="page"{% endif %}>{{ link.label }}</a></li>
+                    {%- endfor %}
                 </ul>
             </nav>
             <button id="theme-toggle" type="button" aria-label="Toggle dark mode"></button>
 {% if config.TRANSLATE %}
             <div id="google_translate_element"></div>
 {% endif %}
-        </div>
+        </header>
         <div id="body">
             <main id="content">
 
@@ -58,34 +63,35 @@
 <!-- end content -->
 
             </main>
-            <aside id="sidebar">
+            <aside id="sidebar" aria-labelledby="sidebar-heading">
+                <h2 id="sidebar-heading" class="sr-only">More from this blog</h2>
                 {%- if recent_posts|default([]) %}
-                <section>
-                    <h3>Recent posts</h3>
+                <nav aria-labelledby="sidebar-recent-heading">
+                    <h3 id="sidebar-recent-heading">Latest posts</h3>
                     <ul>
                         {%- for post in recent_posts %}
                         <li><a href="{{ url_for('views.content', slug=post.slug) }}">{{ post.title }}</a></li>
                         {%- endfor %}
                     </ul>
-                </section>
+                </nav>
                 {%- endif %}
                 {%- if tags %}
-                <section>
-                    <h3>Tags</h3>
+                <nav aria-labelledby="sidebar-tags-heading">
+                    <h3 id="sidebar-tags-heading">Tags</h3>
                     <ul class="tag-list">
                         {%- for t in tags %}
                         <li><a href="{{ url_for('views.tag', tag=t) }}">{{ t }}</a></li>
                         {%- endfor %}
                     </ul>
-                </section>
+                </nav>
                 {%- endif %}
             </aside>
         </div>
-        <div id="footer">
+        <footer id="footer">
             <p>
                 Powered by: <a href="https://github.com/RMCampos/blohg">blohg {{ version }}</a>
             </p>
-        </div>
+        </footer>
 
 <!-- begin disqus footer -->
 {% block disqus_footer %}{% endblock %}

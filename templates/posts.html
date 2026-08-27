@@ -5,19 +5,22 @@
 {%- block body %}
 
 {%- if tag -%}
-<h4>Tag: {{ ' + '.join(tag) }}
+<h1 class="page-title">Tag: {{ ' + '.join(tag) }}
     (<small><a href="{{ url_for('views.atom', tag='/'.join(tag)) }}">Atom feed</a></small>)
-</h4>
+</h1>
+{%- elif not full_content -%}
+<h1 class="sr-only">Latest posts</h1>
 {%- endif %}
 
 {%- for post in posts %}
-<h2>
+{%- set heading = 'h1' if full_content else 'h2' %}
+<{{ heading }}>
     {%- if is_post(post.slug) -%}
     <a href="{{ url_for('views.content', slug=post.slug) }}">{{ post.title }}</a>
     {%- else -%}
     {{ post.title }}
     {%- endif -%}
-</h2>
+</{{ heading }}>
 
 <!-- begin html parsed by docutils -->
 {% if full_content -%}

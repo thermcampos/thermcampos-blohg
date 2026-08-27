@@ -20,7 +20,7 @@ Flask app that uses git as back-end and Jinja2 to render templates.
 I also decided to get back to IRC, where I spent a lot of time in the past 
 chatting with friends about Linux. But the old server is gone, Freenode.
 Now the common choice seems to be Libera. If you're in there too, ping me
-anytime, just search for my handler **RMCampos**.
+anytime, just search for my handler **thermcampos**.
 
 But there's more
 ----------------

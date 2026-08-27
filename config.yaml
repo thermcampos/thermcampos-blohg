@@ -8,3 +8,5 @@ TIMEZONE: UTC
 #POST_EXT: .rst
 THEME: Dark
 TRANSLATE: False
+EXTENSIONS:
+  - sidebar

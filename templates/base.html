@@ -38,11 +38,11 @@
             <h2>{{ config.TAGLINE }}</h2>
             <nav>
                 <ul>
-                    <li><a href="{{ url_for('views.home') }}">Home</a></li>
-                    <li><a href="{{ url_for('views.post_list') }}">Posts</a></li>
-                    <li><a href="{{ url_for('views.content', slug='license') }}">License</a></li>
-                    <li><a href="{{ url_for('views.content', slug='recommends') }}">Recommends</a></li> 
-                    <li><a href="{{ url_for('views.content', slug='about') }}">About</a></li>
+                    <li><a href="{{ url_for('views.home') }}" data-label="Home" class="{{ 'active' if active_page == '' }}">Home</a></li>
+                    <li><a href="{{ url_for('views.post_list') }}" data-label="Posts" class="{{ 'active' if active_page == 'post' }}">Posts</a></li>
+                    <li><a href="{{ url_for('views.content', slug='license') }}" data-label="License" class="{{ 'active' if active_page == 'license' }}">License</a></li>
+                    <li><a href="{{ url_for('views.content', slug='recommends') }}" data-label="Recommends" class="{{ 'active' if active_page == 'recommends' }}">Recommends</a></li>
+                    <li><a href="{{ url_for('views.content', slug='about') }}" data-label="About" class="{{ 'active' if active_page == 'about' }}">About</a></li>
                 </ul>
             </nav>
             <button id="theme-toggle" type="button" aria-label="Toggle dark mode"></button>
@@ -51,11 +51,35 @@
 {% endif %}
         </div>
         <div id="body">
+            <main id="content">
 
 <!-- begin content -->
 {% block body %}{% endblock %}
 <!-- end content -->
 
+            </main>
+            <aside id="sidebar">
+                {%- if recent_posts|default([]) %}
+                <section>
+                    <h3>Recent posts</h3>
+                    <ul>
+                        {%- for post in recent_posts %}
+                        <li><a href="{{ url_for('views.content', slug=post.slug) }}">{{ post.title }}</a></li>
+                        {%- endfor %}
+                    </ul>
+                </section>
+                {%- endif %}
+                {%- if tags %}
+                <section>
+                    <h3>Tags</h3>
+                    <ul class="tag-list">
+                        {%- for t in tags %}
+                        <li><a href="{{ url_for('views.tag', tag=t) }}">{{ t }}</a></li>
+                        {%- endfor %}
+                    </ul>
+                </section>
+                {%- endif %}
+            </aside>
         </div>
         <div id="footer">
             <p>

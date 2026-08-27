@@ -39,6 +39,9 @@ body {
     line-height: 1.6;
     background-color: var(--bg);
     color: var(--fg);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 a {
@@ -47,7 +50,8 @@ a {
 }
 
 a:hover {
-    text-decoration: underline;
+    text-decoration: none;
+    font-weight: 700;
 }
 
 ul, li {
@@ -88,17 +92,21 @@ table {
 
 #header {
     text-align: center;
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 20px;
+    flex-shrink: 0;
 }
 
 #header h1 {
-    font-size: 50px;
-    margin-top: 25px;
+    font-size: 34px;
+    margin-top: 20px;
 }
 
 #header h2 {
     font-size: 15px;
-    margin-top: 15px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 16px;
     color: var(--muted);
 }
 
@@ -111,8 +119,27 @@ table {
     margin: 0 15px;
 }
 
+#header nav a {
+    display: inline-block;
+    text-align: center;
+}
+
+#header nav a.active {
+    font-weight: 700;
+}
+
+/* reserve bold width so hover/active doesn't reflow the nav */
+#header nav a::after {
+    display: block;
+    content: attr(data-label);
+    font-weight: 700;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+
 #theme-toggle {
-    margin-top: 15px;
+    margin-top: 12px;
     font: inherit;
     font-size: 14px;
     color: var(--fg);
@@ -128,14 +155,68 @@ table {
 }
 
 #body {
-    max-width: 720px;
+    width: 100%;
+    max-width: 1040px;
     margin: 25px auto;
     padding: 0 20px;
+    display: flex;
+    gap: 48px;
+    align-items: flex-start;
+    flex: 1 0 auto;
+    min-height: 0;
+}
+
+#content {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 720px;
+}
+
+#sidebar {
+    flex: 0 0 200px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+#sidebar section {
+    margin-bottom: 28px;
+}
+
+#sidebar h3 {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 4px;
+    margin-bottom: 10px;
+}
+
+#body #sidebar ul, #body #sidebar li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#body #sidebar li {
+    margin: 5px 0;
+}
+
+#sidebar .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
 }
 
 #body h2 {
     margin-top: 15px;
     margin-bottom: 10px;
+}
+
+/* separate stacked posts on listing pages */
+#content .metadata ~ h2 {
+    margin-top: 44px;
 }
 
 #body h2 a {
@@ -160,22 +241,59 @@ table {
 }
 
 .pagination {
-    margin-top: 15px;
-    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    margin-top: 44px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 14px;
+}
+
+.pagination-status {
+    color: var(--muted);
+}
+
+.pagination .is-disabled {
+    color: var(--border);
 }
 
 .metadata {
-    border: 1px solid var(--border);
-    margin: 15px auto;
-    padding: 6px;
-    font-size: 11px;
+    border-top: 1px solid var(--border);
+    margin: 24px 0 0;
+    padding: 8px 0 0;
+    font-size: 12px;
     color: var(--muted);
 }
 
 #footer {
     text-align: center;
-    margin: 15px auto;
+    margin-top: auto;
+    padding: 20px;
     color: var(--muted);
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+    #body {
+        flex-direction: column;
+        gap: 32px;
+        max-width: 720px;
+    }
+
+    #content {
+        max-width: none;
+    }
+
+    #sidebar {
+        flex-basis: auto;
+        width: 100%;
+        border-top: 1px solid var(--border);
+        padding-top: 20px;
+    }
 }
 
 @media (max-width: 600px) {

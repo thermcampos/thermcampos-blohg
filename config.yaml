@@ -3,7 +3,9 @@ TITLE_HTML: thermcampos
 TAGLINE: Welcome to my blog, personal corner and stuff
 #POSTS_PER_PAGE: 10
 AUTHOR: R. Campos
-DISQUS: ricardocamposblog-1
+COMMENTS: isso
+ISSO_URL: https://comments.thermcampos.blog/
+#DISQUS: your-disqus-id
 TIMEZONE: UTC
 #POST_EXT: .rst
 THEME: Dark

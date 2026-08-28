@@ -55,8 +55,8 @@
     {%- endfor %}
     <br />
     {%- endif %}
-    {% if is_post(post.slug) and config.DISQUS -%}
-    <a href="{{ url_for('views.content', slug=post.slug) }}#disqus_thread">Comments</a> -
+    {% if is_post(post.slug) and  comment_system != 'none' -%}
+    <a href="{{ url_for('views.content', slug=post.slug) }}#{% if comment_system == 'isso' %}isso-thread{% else %}disqus_thread{% endif %}">Comments</a> -
     {%- endif %}
     <a href="{{ url_for('views.content', slug=post.slug) }}">Permalink</a>
     {%- if config.SHOW_RST_SOURCE %}
@@ -68,6 +68,10 @@
 <!-- start disqus post -->
 {% block disqus_post %}{% endblock %}
 <!-- end disqus post -->
+
+<!-- start isso post -->
+{% block isso_post %}{% endblock %}
+<!-- end isso post -->
 
 {% endfor %}
 

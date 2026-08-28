@@ -33,7 +33,7 @@
 {%- endblock %}
 
 {%- block disqus_header %}
-{%- if is_post(current_path) and config.DISQUS %}
+{%- if comment_system == 'disqus' and is_post(current_path) and config.DISQUS %}
 <script type="text/javascript">
     var disqus_shortname = "{{ config.DISQUS }}";
     var disqus_url = "{{ request.url }}";
@@ -44,8 +44,14 @@
 {%- endif %}
 {%- endblock %}
 
+{%- block isso_header %}
+{%- if comment_system == 'isso' and is_post(current_path) %}
+<script data-isso="{{ isso_url }}" src="{{ isso_url }}js/embed.min.js"></script>
+{%- endif %}
+{%- endblock %}
+
 {%- block disqus_post %}
-{%- if is_post(current_path) and config.DISQUS %}
+{%- if comment_system == 'disqus' and is_post(current_path) and config.DISQUS %}
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     (function() {
@@ -68,8 +74,15 @@
 {%- endif %}
 {%- endblock %}
 
+{%- block isso_post %}
+{%- if comment_system == 'isso' and is_post(current_path) %}
+<section id="isso-thread" data-isso-id="{{ current_path }}"></section>
+<noscript>Javascript needs to be activated to view comments.</noscript>
+{%- endif %}
+{%- endblock %}
+
 {%- block disqus_footer %}
-{%- if config.DISQUS %}
+{%- if comment_system == 'disqus' and config.DISQUS %}
 <script type="text/javascript">
     //<![CDATA[
     (function() {

@@ -9,7 +9,7 @@ updates and what's going on recently. Let's dive in!
 
 .. read_more
 
-Hybrid work
+hybrid work
 -----------
 
 I decided (not entirely by choice) to go regularly to a coworking space near my
@@ -28,7 +28,7 @@ years now, and until recently I was strongly refusing to go back to any office.
 But here I am, and I'm pretty happy. Anyways, let's see what the recommendations
 section brought this time.
 
-Recommendations
+recommendations
 ---------------
 
 Along with updates, I'd like to share findings that caught my attention. They

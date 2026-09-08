@@ -1,5 +1,5 @@
-Print Hello World
-=================
+hello world
+===========
 
 .. tags: updates
 
@@ -22,8 +22,8 @@ chatting with friends about Linux. But the old server is gone, Freenode.
 Now the common choice seems to be Libera. If you're in there too, ping me
 anytime, just search for my handler **thermcampos**.
 
-But there's more
-----------------
+there's more
+------------
 
 Another reason that helped me decide having a personal blog again was a post
 that I can't find right now (sorry) saying that many people don't write

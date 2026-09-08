@@ -41,11 +41,11 @@
             <div class="site-name"><a href="{{ url_for('views.home') }}" rel="home">{{ config.TITLE_HTML }}</a></div>
             <p class="site-tagline">{{ config.TAGLINE }}</p>
             {%- set navlinks = [
-                {'href': url_for('views.home'), 'label': 'Home', 'key': ''},
-                {'href': url_for('views.post_list'), 'label': 'Posts', 'key': 'post'},
-                {'href': url_for('views.content', slug='license'), 'label': 'License', 'key': 'license'},
-                {'href': url_for('views.content', slug='recommends'), 'label': 'Recommends', 'key': 'recommends'},
-                {'href': url_for('views.content', slug='about'), 'label': 'About', 'key': 'about'}
+                {'href': url_for('views.home'), 'label': 'home', 'key': ''},
+                {'href': url_for('views.post_list'), 'label': 'posts', 'key': 'post'},
+                {'href': url_for('views.content', slug='license'), 'label': 'license', 'key': 'license'},
+                {'href': url_for('views.content', slug='recommends'), 'label': 'recommendations', 'key': 'recommendations'},
+                {'href': url_for('views.content', slug='about'), 'label': 'about', 'key': 'about'}
             ] %}
             <nav aria-label="Primary">
                 <ul>
@@ -106,7 +106,7 @@
                 var btn = document.getElementById('theme-toggle');
                 var root = document.documentElement;
                 function label(theme) {
-                    return theme === 'dark' ? 'Light' : 'Dark';
+                    return theme === 'dark' ? 'light' : 'dark';
                 }
                 btn.textContent = label(root.getAttribute('data-theme'));
                 btn.addEventListener('click', function() {

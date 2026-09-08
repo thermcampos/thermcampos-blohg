@@ -299,7 +299,9 @@ table {
     border-top: 1px solid var(--border);
     margin: 24px 0 0;
     padding: 8px 0 0;
+    font-family: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
     font-size: 12px;
+    line-height: 1.3;
     color: var(--muted);
 }
 

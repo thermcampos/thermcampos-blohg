@@ -1,7 +1,7 @@
 monthly updates
 ===============
 
-.. tags: updates,recommends
+.. tags: updates,recommendations
 
 September has just started and is already flying away, going by light-speed
 fast! Christmas is almost knocking on the door. But I'm here to talk about

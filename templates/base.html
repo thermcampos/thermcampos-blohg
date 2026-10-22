@@ -23,6 +23,14 @@
             url_for('views.atom') }}" title="{{ config.TITLE }}" />
         <title>{{ config.TITLE }}{% block title %}{% endblock %}</title>
 
+<!-- begin umami analytics -->
+{% if config.UMAMI_WEBSITE_ID %}
+        <script defer src="{{ config.UMAMI_URL|default('https://cloud.umami.is') }}/script.js"
+            data-website-id="{{ config.UMAMI_WEBSITE_ID }}"
+            {%- if config.UMAMI_DOMAINS %} data-domains="{{ config.UMAMI_DOMAINS }}"{% endif %}></script>
+{% endif %}
+<!-- end umami analytics -->
+
 <!-- begin opengraph header -->
 {% block opengraph_header %}{% endblock %}
 <!-- end opengraph header -->

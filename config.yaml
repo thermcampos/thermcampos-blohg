@@ -10,5 +10,8 @@ TIMEZONE: UTC
 #POST_EXT: .rst
 THEME: Dark
 TRANSLATE: False
+UMAMI_WEBSITE_ID: f49ea7e3-6492-4a5c-a42c-f9bb9c3a7d88
+#UMAMI_URL: https://cloud.umami.is
+UMAMI_DOMAINS: thermcampos.blog
 EXTENSIONS:
   - sidebar

@@ -2,13 +2,15 @@ minimal initramfs script
 =========================
 
 .. tags: linux,kernel
+.. attachment-image:: llvm-on-gentoo-with-minimal-initramfs-header.png
 
 After several years having Debian as my main Linux distro_, I've decided to go
 back to Gentoo_, the distro who caught my attention since day one. However, my
-root partition is encrypted. While Debian has an out-of-the-box solution that
+root partition was encrypted. While Debian has an out-of-the-box solution that
 makes everyone's life easier and almost transparent, Gentoo goes the opposite
-way. *You* have to connect the dots and make it work *yourself*. I had to stop,
-plan for a moment, and get ready.
+way. *You* have to connect the dots and make it work *yourself*, in this case,
+*myself*. I had to stop, plan for a moment, and get ready. So I had to find a
+way to make it work without dropping my encrypted partition.
 
 In this short post, I'll be sharing the steps I took, the shell scripts,
 and how I wired up a minimal init script, that I called initramfs_, although

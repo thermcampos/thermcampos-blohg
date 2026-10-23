@@ -1,5 +1,5 @@
-minimal initramfs script
-=========================
+LLVM on Gentoo with minimal initramfs
+=====================================
 
 .. tags: linux,kernel
 .. attachment-image:: llvm-on-gentoo-with-minimal-initramfs-header.png

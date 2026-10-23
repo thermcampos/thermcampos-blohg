@@ -1,4 +1,4 @@
-the benefits of leetcode
+The benefits of leetcode
 ========================
 
 .. tags: leetcode

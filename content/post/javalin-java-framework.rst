@@ -1,4 +1,4 @@
-javalin the lightweight java framework
+Javalin the lightweight java framework
 ======================================
 
 .. tags: java

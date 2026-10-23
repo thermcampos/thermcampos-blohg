@@ -1,7 +1,8 @@
-hello world
+Hello World
 ===========
 
 .. tags: updates
+.. attachment-image:: hello-world-header.png
 
 Welcome to the very first post. Long time ago (2011-2013) I use to write to a
 personal blog like this, then life got busy, and all faded away. I must say I

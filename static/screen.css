@@ -34,9 +34,12 @@
 }
 
 body {
-    font-family: "Inter", Georgia, Verdana, sans-serif;
+    font-family: "Noto Sans", Georgia, Verdana, sans-serif;
+    font-optical-sizing: auto;
     font-size: 1rem;
     line-height: 1.75;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
     letter-spacing: normal;
     background-color: var(--bg);
     color: var(--fg);

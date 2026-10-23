@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YouTube Banner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link id="fonts" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+  :root { --bg: #15191a; --fg: #DFE6E9; --muted: #B2BEC3; --accent: #74B9FF; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font-family: "Inter", sans-serif; }
+  .toolbar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; padding: 16px; }
+  .toolbar button, .toolbar label { font: 14px "JetBrains Mono", monospace; color: var(--fg); }
+  .toolbar button { background: #2D3436; border: 1px solid #454B4D; border-radius: 6px; padding: 8px 14px; cursor: pointer; }
+  .toolbar button:hover { border-color: var(--accent); }
+  .toolbar small { color: var(--muted); }
+  .stage { padding: 0 16px 16px; }
+  #banner { width: 100%; height: auto; display: block; }
+  #banner.hide-guides #guides { display: none; }
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <button id="download">Download PNG (2048×1152)</button>
+  <label><input type="checkbox" id="guides"> Show YouTube safe areas</label>
+  <small>Inner box = safe area on all devices (1235×338). Middle box = desktop max (2048×423).</small>
+</div>
+<div class="stage">
+<svg id="banner" class="hide-guides" xmlns="http://www.w3.org/2000/svg" width="2048" height="1152" viewBox="0 0 2048 1152">
+  <defs>
+    <style>
+      .mono { font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace; }
+      .sans { font-family: "Inter", Verdana, sans-serif; }
+    </style>
+    <radialGradient id="glow" cx="50%" cy="50%" r="55%">
+      <stop offset="0" stop-color="#0984E3" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#0984E3" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1b2022"/>
+      <stop offset="0.5" stop-color="#22282A"/>
+      <stop offset="1" stop-color="#1a1f21"/>
+    </linearGradient>
+    <linearGradient id="titleFill" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#DFE6E9"/>
+      <stop offset="1" stop-color="#74B9FF"/>
+    </linearGradient>
+    <pattern id="dots" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.6" fill="#454B4D" fill-opacity="0.55"/>
+    </pattern>
+    <linearGradient id="fadeX" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="1"/>
+      <stop offset="0.3" stop-color="#fff" stop-opacity="0.15"/>
+      <stop offset="0.7" stop-color="#fff" stop-opacity="0.15"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="1"/>
+    </linearGradient>
+    <mask id="dotMask"><rect width="2048" height="1152" fill="url(#fadeX)"/></mask>
+  </defs>
+
+  <!-- background -->
+  <rect width="2048" height="1152" fill="url(#bg)"/>
+  <rect width="2048" height="1152" fill="url(#dots)" mask="url(#dotMask)"/>
+  <ellipse cx="1024" cy="576" rx="900" ry="420" fill="url(#glow)"/>
+
+  <!-- horizontal accent rules framing the desktop strip -->
+  <line x1="0" y1="372" x2="2048" y2="372" stroke="#74B9FF" stroke-opacity="0.12" stroke-width="2"/>
+  <line x1="0" y1="780" x2="2048" y2="780" stroke="#74B9FF" stroke-opacity="0.12" stroke-width="2"/>
+
+  <!-- left decoration: terminal window -->
+  <g transform="translate(70 420) rotate(-3)" opacity="0.85">
+    <rect width="340" height="300" rx="14" fill="#2D3436" stroke="#454B4D" stroke-width="2"/>
+    <rect width="340" height="40" rx="14" fill="#454B4D"/>
+    <rect y="26" width="340" height="14" fill="#454B4D"/>
+    <circle cx="26" cy="20" r="7" fill="#ff7675"/>
+    <circle cx="50" cy="20" r="7" fill="#fdcb6e"/>
+    <circle cx="74" cy="20" r="7" fill="#55efc4"/>
+    <g class="mono" font-size="17">
+      <text x="22" y="82" fill="#74B9FF">$ <tspan fill="#DFE6E9">uname -o</tspan></text>
+      <text x="22" y="110" fill="#B2BEC3">GNU/Linux</text>
+      <text x="22" y="150" fill="#74B9FF">$ <tspan fill="#DFE6E9">git log --oneline</tspan></text>
+      <text x="22" y="178" fill="#fdcb6e">a1b2c3d <tspan fill="#B2BEC3">ship it</tspan></text>
+      <text x="22" y="206" fill="#fdcb6e">9f8e7d6 <tspan fill="#B2BEC3">fix: off-by-one</tspan></text>
+      <text x="22" y="234" fill="#fdcb6e">4c5d6e7 <tspan fill="#B2BEC3">init</tspan></text>
+      <text x="22" y="272" fill="#74B9FF">$ <tspan fill="#DFE6E9">_</tspan></text>
+    </g>
+  </g>
+
+  <!-- right decoration: code snippet -->
+  <g transform="translate(1640 430) rotate(3)" opacity="0.85">
+    <rect width="340" height="290" rx="14" fill="#2D3436" stroke="#454B4D" stroke-width="2"/>
+    <g class="mono" font-size="17">
+      <text x="22" y="44" fill="#666666">// still learning</text>
+      <text x="22" y="80" fill="#74B9FF">while <tspan fill="#DFE6E9">(curious) {</tspan></text>
+      <text x="48" y="112" fill="#DFE6E9">read<tspan fill="#B2BEC3">();</tspan></text>
+      <text x="48" y="144" fill="#DFE6E9">build<tspan fill="#B2BEC3">();</tspan></text>
+      <text x="48" y="176" fill="#DFE6E9">break<tspan fill="#B2BEC3">();</tspan></text>
+      <text x="48" y="208" fill="#DFE6E9">share<tspan fill="#B2BEC3">();</tspan></text>
+      <text x="22" y="240" fill="#DFE6E9">}</text>
+    </g>
+  </g>
+
+  <!-- main content: kept inside the 1235x338 safe area (x 406–1641, y 407–745) -->
+  <g text-anchor="middle">
+    <text x="1024" y="478" class="mono" font-size="30" fill="#74B9FF">
+      ~/tech-corner<tspan fill="#B2BEC3"> $ </tspan><tspan fill="#DFE6E9">cat README</tspan>
+    </text>
+    <text id="title" x="1024" y="610" class="sans" font-size="136" font-weight="800" letter-spacing="-3" fill="url(#titleFill)">thermcampos</text>
+    <text x="1024" y="676" class="sans" font-size="38" font-weight="600" fill="#DFE6E9">
+      software engineering<tspan fill="#74B9FF"> · </tspan>linux<tspan fill="#74B9FF"> · </tspan>open source
+    </text>
+    <text x="1024" y="726" class="mono" font-size="24" fill="#B2BEC3">blog posts, in video format — thermcampos.blog</text>
+  </g>
+  <!-- cursor block after the title -->
+  <rect id="cursor" x="1470" y="508" width="16" height="110" fill="#74B9FF">
+    <animate attributeName="opacity" values="1;1;0;0" dur="1.1s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- guides (hidden by default; not part of exported PNG) -->
+  <g id="guides" fill="none" stroke-width="3" stroke-dasharray="12 8">
+    <rect x="0" y="364.5" width="2048" height="423" stroke="#fdcb6e"/>
+    <rect x="406.5" y="407" width="1235" height="338" stroke="#ff7675"/>
+  </g>
+</svg>
+</div>
+<script>
+  const svg = document.getElementById('banner');
+  // Place the cursor right after the title once the real font has loaded.
+  document.fonts.ready.then(() => {
+    const b = document.getElementById('title').getBBox();
+    document.getElementById('cursor').setAttribute('x', Math.round(b.x + b.width + 14));
+  });
+  document.getElementById('guides').addEventListener('change', e => {
+    svg.classList.toggle('hide-guides', !e.target.checked);
+  });
+
+  // Inline Google Fonts as data URIs so the canvas render uses the real fonts.
+  async function fontCss() {
+    try {
+      const href = document.getElementById('fonts').href;
+      let css = await (await fetch(href)).text();
+      const urls = [...new Set(css.match(/https:[^)]+\.woff2/g) || [])];
+      for (const u of urls) {
+        const blob = await (await fetch(u)).blob();
+        const data = await new Promise(r => { const fr = new FileReader(); fr.onload = () => r(fr.result); fr.readAsDataURL(blob); });
+        css = css.split(u).join(data);
+      }
+      return css;
+    } catch (e) { return ''; }
+  }
+
+  document.getElementById('download').addEventListener('click', async () => {
+    const clone = svg.cloneNode(true);
+    clone.querySelector('#guides').remove();
+    clone.querySelectorAll('animate').forEach(a => a.remove());
+    const style = document.createElementNS('http://www.w3.org/2000/svg', 'style');
+    style.textContent = await fontCss();
+    clone.querySelector('defs').prepend(style);
+    const xml = new XMLSerializer().serializeToString(clone);
+    const img = new Image();
+    img.onload = () => {
+      const c = document.createElement('canvas');
+      c.width = 2048; c.height = 1152;
+      c.getContext('2d').drawImage(img, 0, 0, 2048, 1152);
+      c.toBlob(b => {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(b);
+        a.download = 'youtube-banner-2048x1152.png';
+        a.click();
+      }, 'image/png');
+    };
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(xml);
+  });
+</script>
+</body>
+</html>

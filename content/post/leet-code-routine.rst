@@ -3,6 +3,7 @@ the benefits of leetcode
 
 .. tags: leetcode
 .. date: 2026-10-22 11:40:11
+.. attachment-image:: the-benefits-of-leetcode-header.png
 
 Hello everyone! This time I'm here to invite you, and perhaps introduce you,
 to the amazing and scaring world of leet code. In case you're not familiar

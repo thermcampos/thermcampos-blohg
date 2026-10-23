@@ -3,6 +3,7 @@ javalin the lightweight java framework
 
 .. tags: java
 .. date: 2026-10-01 18:15:11
+.. attachment-image:: javalin-the-lightweight-java-framework-header.png
 
 I'd like to introduce you all to Javalin_. Java is known for being heavy and
 bloated, verbose, often flagged as bad choice for cold-start functions, or

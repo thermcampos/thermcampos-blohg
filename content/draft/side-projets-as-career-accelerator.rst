@@ -1,7 +1,6 @@
 Side Projects as career accelerator
 ===================================
 
-.. tags: projects, career 
 .. date: 2027-11-04 11:40:11
 
 Hello! In this post I want to provide you a great way of closing gaps in the

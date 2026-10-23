@@ -16,24 +16,19 @@ I'm from Brazil, currently living in Joinville city.
 Contact
 -------
 
-Email: ricardompcampos@gmail.com
+* **Email**: ricardompcampos@gmail.com
+* **Telegram**: https://t.me/thermcampos
+* **IRC**: thermcampos [at libera] (I usually join *#gentoo* and *#gentoo-chat*)
+* **Discord**: https://discord.com/users/693090652770009138
+* **LinkedIn**: https://www.linkedin.com/in/ricardompcampos/
+* **GitHub**: https://github.com/thermcampos
+* **Portfolio, CV and Projects**: https://thermcampos.github.io/portfolio-and-cv/
+* **Instagram**: https://instagram.com/thermcampos
 
-Telegram: https://t.me/thermcampos
+|
 
-IRC: thermcampos [at libera]
-
-Discord: https://discord.com/users/693090652770009138
-
-LinkedIn: https://www.linkedin.com/in/ricardompcampos/
-
-GitHub: https://github.com/thermcampos
-
-Portfolio, CV and Projects: https://thermcampos.github.io/portfolio-and-cv/
-
-Instagram: https://instagram.com/thermcampos
-
-About this blog
----------------
+About this blog (nerd content)
+------------------------------
 
 If you like what you see, here's more information for you. This blog
 is a simple and easy to use CMS engine, that uses Git as backend, to 

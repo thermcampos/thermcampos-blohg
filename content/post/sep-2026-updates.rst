@@ -1,7 +1,8 @@
-monthly updates
-===============
+Monthly updates - Sep 2026
+==========================
 
 .. tags: updates,recommendations
+.. attachment-image:: monthly-updates-sep-2026-header.png
 
 September has just started and is already flying away, going by light-speed
 fast! Christmas is almost knocking on the door. But I'm here to talk about

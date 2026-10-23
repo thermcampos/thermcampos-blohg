@@ -9,7 +9,7 @@ and Docker.
 2. Create an application
 3. In the **General** upper tab, clicks **Docker** in the **Provider** tab
   * Then fills with
-  * Docker image: `ghcr.io/thermcampos/blohg:0.14-rc2`
+  * Docker image: `ghcr.io/thermcampos/blohg:0.14-rc3`
   * Registry URL: `ghcr.io`
   * Username: `thermcampos`
   * Password: `<blank>` (no passsword)
@@ -31,9 +31,15 @@ and Docker.
   * Host Path: `/home/betty/thermcampos-blohg`
   * Mounth Path (In the container): `/repo`
   * Click **Save**
-6. Go back to **General** upper tab
-7. Click the **Deploy** button under **Deploy Settings**
-8. Monitor logs in the **Logs** tab
+6. In the **Environment** upper tab, add the following and click **Save**
+  * `FORWARDED_ALLOW_IPS=*`
+  * Traefik terminates HTTPS and forwards plain HTTP to the container. Without
+    this, gunicorn ignores the proxy's `X-Forwarded-Proto` header and blohg
+    generates `http://` URLs for images, feeds and attachments, which get
+    blocked as mixed content
+7. Go back to **General** upper tab
+8. Click the **Deploy** button under **Deploy Settings**
+9. Monitor logs in the **Logs** tab
 
 Done
 
@@ -47,6 +53,6 @@ docker run -d \
   --name blohg \
   -p 80:8000 \
   -v ~/rmcampos-blohg:/repo:ro \
-  rmcampos/blohg:latest
+  ghcr.io/thermcampos/blohg:0.14-rc3
 ```
 

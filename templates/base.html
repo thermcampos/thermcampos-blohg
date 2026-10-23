@@ -3,7 +3,7 @@
     :copyright: (c) 2010-2011 by Rafael Goncalves Martins
     :license: GPL-2
 -->
-<html data-theme="{{ 'dark' if config.THEME == 'Dark' else 'light' }}">
+<html lang="en" data-theme="{{ 'dark' if config.THEME == 'Dark' else 'light' }}">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -80,9 +80,9 @@
                 {%- if recent_posts|default([]) %}
                 <nav aria-labelledby="sidebar-recent-heading">
                     <h3 id="sidebar-recent-heading">Latest posts</h3>
-                    <ul>
+                    <ul class="recent-list">
                         {%- for post in recent_posts %}
-                        <li><a href="{{ url_for('views.content', slug=post.slug) }}">{{ post.title }}</a></li>
+                        <li><a href="{{ url_for('views.content', slug=post.slug) }}" title="{{ post.title }}">{{ post.title }}</a></li>
                         {%- endfor %}
                     </ul>
                 </nav>

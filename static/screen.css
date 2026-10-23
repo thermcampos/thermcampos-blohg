@@ -181,6 +181,7 @@ table {
 
 #sidebar {
     flex: 0 0 200px;
+    min-width: 0;
     font-size: 14px;
     line-height: 1.5;
 }
@@ -204,6 +205,14 @@ table {
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+/* keep each latest post on a single line */
+#sidebar .recent-list a {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #sidebar .tag-list {
@@ -265,6 +274,8 @@ table {
 
 #content p {
     margin-block: 1.25em;
+    text-align: justify;
+    hyphens: auto;
 }
 
 #body ul, #body li {

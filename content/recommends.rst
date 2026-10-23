@@ -1,42 +1,53 @@
 Recommends
 ==========
 
-These are my personal recommendations. Note that if I recommend it, I like it very much.
+These are my personal recommendations. Either I use it daily or read it
+regularly.
 
-Linux Distro
-------------
+Linux Distribution
+------------------
 
-**Gentoo** - In short, Gentoo is a Linux Distro for nerds, people with passion (and time)
-for going deep. Super flexible, you can enable/disable what you want at package level easily.
-You can use testing versions only for some packages or at system level, and have a lean system
-like no other distro. If you want to learn more, please see the post `Why Gentoo`_.
+**Gentoo** - In short, Gentoo is a Linux Distro for nerds, people with passion
+(and time) for going deep. Super flexible, you can enable/disable what you want
+at package level. You can use testing or unstable versions only for the packages
+you like, or at system level if you want, and have a lean system like no other
+distro. If you want to learn more, please see the post `Why Gentoo`_.
 
-But if you're into Linux and don't have this much passion, I mean, time, you can opt for a
-binary-based Distro. Between many options, I recommend Debian using the **Sid** channel. Having
-it well configured it can give you an updated system, recent kernel, and quite stable packages.
+But if you're into Linux and don't have this much passion or time, you can opt
+for a binary-based Distro. Between many options, I'd recommend Debian over the
+**Sid** channel. Debian is the mother distribution that originated many distros,
+it has a strong community, and developers know what they're doing, even in the
+AI crazy times. Debian Sid is unstable by definition, but it's super stable, 
+trust me. It was my distro for years and I never had a kernel panic or had to
+reinstall everything due to a system problem. Sid can give you an updated
+system, recent kernel, and trully rolling-release fashion.
 
 Substack
 --------
 
 These are newsletters you can subscribe and get a great content for free.
 
-* `Alex Rios`_ - Texts about Tech Leadership, software engineering. He also has a Brazilian
+* `Alex Rios`_ - Texts about Tech Leadership, software engineering. He also has
+  a Brazilian
   Substack, you can find it at `Alex Rios BR`_.
-* `Hayk Simonyan`_ - Helping software engineers secure their first tech job and advance to senior
-  roles by teaching exactly what employers look for.
-* `Petar Ivanov`_ - Help devs to level up from developer to architect in the AI era.
+* `Hayk Simonyan`_ - Helping software engineers secure their first tech job and
+  advance to senior roles by teaching exactly what employers look for.
+* `Petar Ivanov`_ - Help devs to level up from developer to architect in the AI
+  era.
 
 |
 
 YouTube Channels
 ----------------
 
-I'm not a YouTube consumer, but sometimes I like watching one or another video about something
-specific. I don't follow or consume any regular YouTuber or content creator. So my recommendation
-list for this section will be short and straight :)
+I'm not a YouTube consumer, but sometimes I like watching one or another video
+about something specific. I don't follow or consume any regular YouTuber or
+content creator.
 
-* `@TiagoTaquelim`_ - Golang developer, teacher and architect. Often shares about architecture.
-* `@RenatoAugustoTech`_ - Often share about system design deep-dives (In Portuguese).
+* `@TiagoTaquelim`_ - Golang developer, teacher and architect. Often shares
+  about architecture.
+* `@RenatoAugustoTech`_ - Often share about system design deep-dives
+  (In Portuguese).
 
 .. _`Why Gentoo`: https://blogs.gentoo.org/mgorny/2026/05/28/why-gentoo/
 

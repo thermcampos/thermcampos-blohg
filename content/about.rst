@@ -30,6 +30,8 @@ GitHub: https://github.com/thermcampos
 
 Portfolio, CV and Projects: https://thermcampos.github.io/portfolio-and-cv/
 
+Instagram: https://instagram.com/thermcampos
+
 About this blog
 ---------------
 
@@ -42,6 +44,7 @@ No panel or UI. You can do everything from your terminal using git and vim.
 This means there's no auth, database, or heavy stuff to care in PHP.
 Blohg is built in Python on top of Flask, and Jinja2 for html rendering.
 You can learn more about it here: https://github.com/thermcampos/blohg.
-All the credit goes to Rafael Martins, the author of Blohg: https://rafaelmartins.com/
+All the credit goes to Rafael Martins, the author of Blohg: 
+https://rafaelmartins.com/
 
 .. author: R. Campos <ricardompcampos@gmail.com>

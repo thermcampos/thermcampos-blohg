@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thumbnail Generator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link id="fonts" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@800&family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+  :root { --bg: #15191a; --fg: #DFE6E9; --muted: #B2BEC3; --accent: #74B9FF; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font-family: "Inter", sans-serif; }
+  .toolbar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; padding: 16px; }
+  .toolbar button, .toolbar label, .toolbar input { font: 14px "JetBrains Mono", monospace; color: var(--fg); }
+  .toolbar button { background: #2D3436; border: 1px solid #454B4D; border-radius: 6px; padding: 8px 14px; cursor: pointer; }
+  .toolbar button:hover { border-color: var(--accent); }
+  .toolbar input[type=text] { flex: 1 1 320px; min-width: 0; background: #22282A; border: 1px solid #454B4D; border-radius: 6px; padding: 8px 12px; }
+  .toolbar input[type=text]:focus { outline: none; border-color: var(--accent); }
+  .toolbar small { color: var(--muted); }
+  .stage { padding: 0 16px 16px; display: grid; gap: 24px; }
+  .stage h2 { font: 13px "JetBrains Mono", monospace; color: var(--muted); margin: 0 0 8px; font-weight: 400; }
+  .stage svg { width: 100%; height: auto; display: block; }
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <label for="title">Video name</label>
+  <input type="text" id="title" placeholder="e.g. Javalin: a lightweight Java web framework">
+  <button id="dl-youtube">Download YouTube (3840×2160)</button>
+  <button id="dl-header">Download post header (3840×1080)</button>
+</div>
+<div class="stage">
+  <section>
+    <h2>youtube thumbnail · 3840×2160</h2>
+    <svg id="youtube" xmlns="http://www.w3.org/2000/svg" width="3840" height="2160" viewBox="0 0 3840 2160"></svg>
+  </section>
+  <section>
+    <h2>post header · 3840×1080</h2>
+    <svg id="header" xmlns="http://www.w3.org/2000/svg" width="3840" height="1080" viewBox="0 0 3840 1080"></svg>
+  </section>
+</div>
+<script>
+  // Per-format layout. Both share the same look; only the title box differs.
+  const FORMATS = {
+    youtube: { w: 3840, h: 2160, maxW: 3100, maxH: 1250, maxLines: 4, maxSize: 340, minSize: 120 },
+    header:  { w: 3840, h: 1080, maxW: 3100, maxH: 560,  maxLines: 2, maxSize: 240, minSize: 100 },
+  };
+  const LINE_HEIGHT = 1.12;
+  const CAP = 0.73;          // Inter cap height ratio, used for vertical centring
+  const TRACKING = -0.02;    // letter-spacing in em
+
+  const ctx = document.createElement('canvas').getContext('2d');
+  function textWidth(s, size) {
+    ctx.font = `800 ${size}px Inter`;
+    return ctx.measureText(s).width + TRACKING * size * s.length;
+  }
+
+  function wrap(words, size, maxW) {
+    const lines = [];
+    let cur = '';
+    for (const w of words) {
+      if (textWidth(w, size) > maxW) return null;
+      const next = cur ? cur + ' ' + w : w;
+      if (!cur || textWidth(next, size) <= maxW) cur = next;
+      else { lines.push(cur); cur = w; }
+    }
+    if (cur) lines.push(cur);
+    return lines;
+  }
+
+  // Largest font size that fits, then the narrowest width that keeps the same
+  // line count, so lines come out balanced instead of leaving an orphan word.
+  function fit(text, f) {
+    const words = text.split(/\s+/).filter(Boolean);
+    if (!words.length) return { size: f.maxSize, lines: [] };
+    for (let size = f.maxSize; size >= f.minSize; size -= 4) {
+      const lines = wrap(words, size, f.maxW);
+      if (!lines || lines.length > f.maxLines) continue;
+      if ((lines.length - 1) * size * LINE_HEIGHT + size * CAP > f.maxH) continue;
+      let lo = 0, hi = f.maxW;
+      while (hi - lo > 4) {
+        const mid = (lo + hi) / 2;
+        const l = wrap(words, size, mid);
+        if (l && l.length <= lines.length) hi = mid; else lo = mid;
+      }
+      return { size, lines: wrap(words, size, hi) };
+    }
+    return { size: f.minSize, lines: wrap(words, f.minSize, Infinity) };
+  }
+
+  const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  function render(svg, f, text) {
+    const { w, h } = f;
+    const { size, lines } = fit(text, f);
+    const lh = size * LINE_HEIGHT;
+    const blockH = Math.max(lines.length - 1, 0) * lh + size * CAP;
+    const firstBaseline = h / 2 - blockH / 2 + size * CAP;
+    const cx = w / 2;
+    const p = svg.id + '-'; // id prefix: both SVGs share one document
+
+    const titleLines = lines.map((l, i) =>
+      `<text x="${cx}" y="${firstBaseline + i * lh}" text-anchor="middle" class="sans" font-size="${size}" font-weight="800" letter-spacing="${TRACKING * size}" fill="url(#${p}titleFill)">${esc(l)}</text>`
+    ).join('');
+
+    // Underscore cursor hangs after the last line, sitting on the baseline.
+    let cursor = '';
+    if (lines.length) {
+      const last = lines[lines.length - 1];
+      const end = cx + textWidth(last, size) / 2;
+      const lastBaseline = firstBaseline + (lines.length - 1) * lh;
+      cursor = `<rect x="${end + size * 0.1}" y="${lastBaseline - size * 0.1}" width="${size * 0.5}" height="${size * 0.1}" fill="#74B9FF"/>`;
+    }
+
+    const m = 140; // edge margin for the small branding text
+    svg.innerHTML = `
+      <defs>
+        <style>
+          .mono { font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace; }
+          .sans { font-family: "Inter", Verdana, sans-serif; }
+        </style>
+        <radialGradient id="${p}glow" cx="50%" cy="50%" r="55%">
+          <stop offset="0" stop-color="#0984E3" stop-opacity="0.24"/>
+          <stop offset="1" stop-color="#0984E3" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="${p}bg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#1b2022"/>
+          <stop offset="0.5" stop-color="#22282A"/>
+          <stop offset="1" stop-color="#1a1f21"/>
+        </linearGradient>
+        <linearGradient id="${p}titleFill" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#DFE6E9"/>
+          <stop offset="1" stop-color="#74B9FF"/>
+        </linearGradient>
+        <pattern id="${p}dots" width="60" height="60" patternUnits="userSpaceOnUse">
+          <circle cx="3" cy="3" r="3" fill="#454B4D" fill-opacity="0.55"/>
+        </pattern>
+        <linearGradient id="${p}fadeX" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#fff" stop-opacity="1"/>
+          <stop offset="0.3" stop-color="#fff" stop-opacity="0.15"/>
+          <stop offset="0.7" stop-color="#fff" stop-opacity="0.15"/>
+          <stop offset="1" stop-color="#fff" stop-opacity="1"/>
+        </linearGradient>
+        <mask id="${p}dotMask"><rect width="${w}" height="${h}" fill="url(#${p}fadeX)"/></mask>
+      </defs>
+      <rect width="${w}" height="${h}" fill="url(#${p}bg)"/>
+      <rect width="${w}" height="${h}" fill="url(#${p}dots)" mask="url(#${p}dotMask)"/>
+      <ellipse cx="${cx}" cy="${h / 2}" rx="${w * 0.45}" ry="${h * 0.42}" fill="url(#${p}glow)"/>
+      <line x1="0" y1="${m * 0.6}" x2="${w}" y2="${m * 0.6}" stroke="#74B9FF" stroke-opacity="0.14" stroke-width="4"/>
+      <line x1="0" y1="${h - m * 0.6}" x2="${w}" y2="${h - m * 0.6}" stroke="#74B9FF" stroke-opacity="0.14" stroke-width="4"/>
+      <text x="${m}" y="${m + 70}" class="mono" font-size="72" fill="#74B9FF">~/tech-corner<tspan fill="#B2BEC3"> $ </tspan><tspan fill="#DFE6E9">./play</tspan></text>
+      ${titleLines}
+      ${cursor}
+      <text x="${m}" y="${h - m}" class="mono" font-size="64" fill="#B2BEC3">thermcampos.blog</text>
+    `;
+  }
+
+  const input = document.getElementById('title');
+  function renderAll() {
+    const text = input.value.trim() || input.placeholder.replace(/^e\.g\.\s*/, '');
+    render(document.getElementById('youtube'), FORMATS.youtube, text);
+    render(document.getElementById('header'), FORMATS.header, text);
+    try { localStorage.setItem('thumb-title', input.value); } catch (e) {}
+  }
+
+  // Inline Google Fonts as data URIs so the canvas render uses the real fonts.
+  let fontCssCache;
+  async function fontCss() {
+    if (fontCssCache !== undefined) return fontCssCache;
+    try {
+      let css = await (await fetch(document.getElementById('fonts').href)).text();
+      const urls = [...new Set(css.match(/https:[^)]+\.woff2/g) || [])];
+      for (const u of urls) {
+        const blob = await (await fetch(u)).blob();
+        const data = await new Promise(r => { const fr = new FileReader(); fr.onload = () => r(fr.result); fr.readAsDataURL(blob); });
+        css = css.split(u).join(data);
+      }
+      return (fontCssCache = css);
+    } catch (e) { return ''; }
+  }
+
+  const slug = () => (input.value.trim() || 'thumbnail').toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+  async function download(id, suffix) {
+    const svg = document.getElementById(id);
+    const clone = svg.cloneNode(true);
+    const style = document.createElementNS('http://www.w3.org/2000/svg', 'style');
+    style.textContent = await fontCss();
+    clone.querySelector('defs').prepend(style);
+    const xml = new XMLSerializer().serializeToString(clone);
+    const img = new Image();
+    img.onload = () => {
+      const c = document.createElement('canvas');
+      c.width = svg.width.baseVal.value; c.height = svg.height.baseVal.value;
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      c.toBlob(b => {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(b);
+        a.download = `${slug()}-${suffix}.png`;
+        a.click();
+      }, 'image/png');
+    };
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(xml);
+  }
+
+  document.getElementById('dl-youtube').addEventListener('click', () => download('youtube', 'youtube'));
+  document.getElementById('dl-header').addEventListener('click', () => download('header', 'header'));
+  input.addEventListener('input', renderAll);
+
+  try { input.value = new URLSearchParams(location.search).get('title') || localStorage.getItem('thumb-title') || ''; } catch (e) {}
+  renderAll();
+  // Re-fit once Inter is actually loaded, since measurements depend on it.
+  document.fonts.load('800 100px Inter').then(renderAll);
+</script>
+</body>
+</html>

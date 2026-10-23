@@ -44,7 +44,7 @@
         <rect id="plate" x="5" y="5" width="140" height="140" rx="30" fill="url(#bg)" stroke="#74B9FF" stroke-width="5"/>
         <g id="logo">
           <text id="label" x="0" y="0" class="mono" font-size="64" font-weight="800" letter-spacing="-4" fill="#DFE6E9">tc</text>
-          <rect id="cursor" x="80" y="-44" width="22" height="48" rx="3" fill="#74B9FF"/>
+          <rect id="cursor" x="80" y="-9" width="34" height="9" rx="2" fill="#74B9FF"/>
         </g>
       </svg>
     </div>
@@ -65,8 +65,8 @@
     const b = label.getBBox();
     const gap = 6;
     cursor.setAttribute('x', b.x + b.width + gap);
-    const width = b.width + gap + 22;
-    const height = 48; // cursor height ≈ cap height of the text
+    const width = b.width + gap + 34;
+    const height = 48; // ≈ cap height of the text
     document.getElementById('logo').setAttribute('transform',
       `translate(${(150 - width) / 2 - b.x} ${(150 + height) / 2 - 4})`);
   }

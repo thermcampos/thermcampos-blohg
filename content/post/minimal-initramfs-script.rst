@@ -1,8 +1,8 @@
-LLVM on Gentoo with minimal initramfs
-=====================================
+LLVM on Gentoo with a minimal initramfs
+=======================================
 
 .. tags: linux,kernel
-.. attachment-image:: llvm-on-gentoo-with-minimal-initramfs-header.png
+.. attachment-image:: llvm-on-gentoo-with-a-minimal-initramfs-header.png
 
 After several years having Debian as my main Linux distro_, I've decided to go
 back to Gentoo_, the distro who caught my attention since day one. However, my

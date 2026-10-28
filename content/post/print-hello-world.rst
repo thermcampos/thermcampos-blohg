@@ -33,8 +33,18 @@ a gotcha, even though is the same content as the other people, it is your
 content with your words. Then bum! That was enough. And here I am. Here we
 are.
 
-Comments will come soon. In the meanwhile, feel free to ping me and chat
-using any of the options in the /contact page.
+*Comments will come soon. In the meanwhile, feel free to ping me and chat
+using any of the options in the /contact page.*
+
+Update: comments are ready! And if you like a video format, this is what
+you can find at https://www.youtube.com/@thermcampos
+
+Here the video for this post:
+
+.. youtube:: kjKiTaqzf-U
+   :align: center
+   :height: 350
+   :width: 622
 
 Bye for now.
 

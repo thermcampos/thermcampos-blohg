@@ -6,13 +6,16 @@ WhisperX will be used to transcribe videos locally, for free using only
 ## Install
 
 ```bash
+# Install
 pip install whisperx
-whisperx video.mkv \
-  --model large-v3
-  --output_format srt \
-  --language en \
-  --device cpu \
-  --initial_prompt "intro with theming and main words"
+
+# Extract wav file
+ffmpeg -i video.mkv -map 0:a:0 -ac 1 -ar 16000 hello-world.wav
+
+# Generate the transcription
+cd ~/projects/whisper.cpp/
+
+./build/bin/whisper-cli -m models/ggml-large-v3-turbo.bin -f ../../hello-world.wav -l en -osrt -t 8 --prompt "Gentoo"
 ```
 
 ## Test
